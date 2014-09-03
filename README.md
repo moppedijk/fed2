@@ -6,7 +6,5 @@ In deze repository zijn de bestanden van het vak Frond-end 2 te vinden, in de ma
 
 ## Best practices
 
-Hieronder vind je de best practices voor het vak Front end 2
-
 + camelcasing names
 + 
