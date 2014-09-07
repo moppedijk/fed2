@@ -1,0 +1,28 @@
+{
+  "name": "webapp",
+  "version": "0.0.1",
+  "description": "Webapplication for the course Front-end development 2",
+  "main": "index.html",
+  "scripts": {
+    "test": "test-app"
+  },
+  "keywords": [
+    "FED",
+    "Front-end",
+    "javascript",
+    "moppedijk",
+    "html",
+    "css"
+  ],
+  "author": "Martijn Oppedijk",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-concat-css": "^0.3.1",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-compass": "^1.0.0",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-uglify": "^0.5.1",
+    "grunt-contrib-watch": "^0.6.1"
+  }
+}
