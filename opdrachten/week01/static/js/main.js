@@ -39,6 +39,10 @@ var geo = geo || {};
     		(geo_position_js.init())?ET.fire(geo.config.gpsAvailable):ET.fire(geo.config.gpsUnavailable);	
 		}
 
+		renderMap: function() {
+			// renderMap function
+		}
+
 	}
 
 	geo.gps = {

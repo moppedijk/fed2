@@ -1,0 +1,26 @@
+{
+  "name": "geo-app",
+  "version": "0.3.0",
+  "description": "Week opdracht 1 clean up geo javascript file",
+  "main": "index.html",
+  "scripts": {
+    "test": "test app"
+  },
+  "keywords": [
+    "Front-end",
+    "2",
+    "Javascript",
+    "HTML5"
+  ],
+  "author": "Martijn Oppedijk",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-concat-css": "^0.3.1",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-compass": "^1.0.0",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-uglify": "^0.5.1",
+    "grunt-contrib-watch": "^0.6.1"
+  }
+}
