@@ -7,7 +7,7 @@
 	<title>Week 01 | Fed 2</title>
 	
 	<!-- static assets -->
-	<link rel="stylesheet" type="text/css" href="static/css/style.css" media="screen, handheld" />
+	<link rel="stylesheet" type="text/css" href="dest/css/style.css" media="screen, handheld" />
 
 </head>
 <body>
@@ -18,7 +18,35 @@
 	<script type="text/javascript" src="dest/js/app.js"></script>
 	<script type="text/javascript">
 
-		geoApp.controller.init();
+		geo.app.init({
+			locations: [
+				{
+					"name": "Theo Thijssenhuis",
+		            "description": "",
+		            "coordinate": {
+		                "latitude": 52.35955620231157,
+		                "longitude": 4.908019635968003
+		            },
+		            "radius": 40,
+		            "onEnter":"#tth",
+		            "onExit":"#bph"
+				},
+				{
+					"name": "Benno premselahuis",
+		            "description": "",
+		            "coordinate": {
+		                "latitude": 52.35955620231157,
+		                "longitude": 4.908019635968003
+		            },
+		            "radius": 60,
+		            "onEnter":"#tth",
+		            "onExit":"#bph"
+				}
+			]
+			,
+			sanbox: '',
+			linear: '',
+		});
 
 	</script>
 </body>

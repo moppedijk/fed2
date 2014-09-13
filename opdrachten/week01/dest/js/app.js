@@ -4,79 +4,76 @@ var geo = geo || {};
 (function () {
   "use strict";
 
-  /**
-   	Geo config
-  */
-		geo.config = {
-				sanbox: "SANDBOX",
-				lineair: "LINEAIR",
-				gpsAvailable: 'GPS_AVAILABLE',
-				gpsUnavailable: 'GPS_UNAVAILABLE',
-				positionUpdated: 'POSITION_UPDATED',
-				refreshRate: 1000,
-				currentPosition: false,
-				currentPositionMarker: false,
-				customDebugging: false,
-				debugId: false,
-				map: false,
-				interval: false,
-				intervalCounter: false,
-				updateMap: false,
-				locatieRij: markerRij = [],
-				locations: []
-
-		/**
-		 "name": "Theo Thijssenhuis",
-            "description": "",
-            "coordinate": {
-                "latitude": 52.35955620231157,
-                "longitude": 4.908019635968003
-            },
-            "radius": 50,
-            "onEnter":"theothijssen.html",
-            "onExit":"naarbennopremsela.html"
-		*/
-	}
-
 	/**
-	 Geo controller
+	 Geo app
 	*/
-	geo.controller = {
+	geo.app = {
 
-		init: function() {
-			geo.helpers.debugMessage("Controleer of GPS beschikbaar is...");
+		// Geo initialize function
+		init: function( settings ) {
+			geo.helpers.debugMessage("Check if gps is available");
+			geo.config.settings = this.settings;
 
     		ET.addListener(geo.config.gpsAvailable, geo.gps.startInterval);
-    		ET.addListener(geo.config.gpsUnavailable, function(){geo.helpers.debugMessage('GPS is niet beschikbaar.')});
+    		ET.addListener(geo.config.gpsUnavailable, function(){geo.helpers.debugMessage('Gps not available')});
 
     		(geo_position_js.init())?ET.fire(geo.config.gpsAvailable):ET.fire(geo.config.gpsUnavailable);	
 		},
-
-		info: function() {
-			// info paga
-		}
-
 	}
+
+})();;// Namespace
+var geo = geo || {};
+
+(function() {
+	"use strict";
+
+	/**
+	 Geo config
+	*/
+	geo.config = {
+		sanbox: "SANDBOX",
+		lineair: "LINEAIR",
+		gpsAvailable: 'GPS_AVAILABLE',
+		gpsUnavailable: 'GPS_UNAVAILABLE',
+		positionUpdated: 'POSITION_UPDATED',
+		refreshRate: 1000,
+		currentPosition: false,
+		currentPositionMarker: false,
+		customDebugging: false,
+		debugId: false,
+		map: false,
+		interval: false,
+		intervalCounter: false,
+		updateMap: false,
+		locatieRij: false,
+		locations: []
+	}
+
+})();;// Namespace
+var geo = geo || {};
+
+(function() {
 
 	/**
 	 Geo gps
 	*/
 	geo.gps = {
 
-		// Start een interval welke op basis van refreshRate de positie updated
+		// Starts an interval that updates the position by refreshRate
 		startInterval: function(event) {
-		    geo.helpers.debugMessage("GPS is beschikbaar, vraag positie.");
-		    this.updatePosition();
-		    geo.config.interval = self.setInterval(this.updatePosition, geo.config.refreshRate);
-		    ET.addListener(geo.config.positionUpdated, this.checkLocations);
+		    geo.helpers.debugMessage("Gps is available, ask position");
+		    geo.gps.updatePosition();
+		    geo.config.interval = self.setInterval(geo.gps.updatePosition, geo.config.refreshRate);
+		    ET.addListener(geo.config.positionUpdated, geo.gps.checkLocations);
 		},
 
 		// Vraag de huidige positie aan geo.js, stel een callback in voor het resultaat
 		updatePosition: function() {
 		    geo.config.intervalCounter++;
+
 		    geo_position_js.getCurrentPosition (
-		    	this.setPosition, 
-		    	_geo_error_handler, 
+		    	geo.gps.setPosition, 
+		    	geo.helpers.geoErrorHandler, 
 		    	{
 		    		enableHighAccuracy: true
 		    	}
@@ -85,6 +82,7 @@ var geo = geo || {};
 
 		// Callback functie voor het instellen van de huidige positie, vuurt een event af
 		setPosition: function(position) {
+
 		    geo.config.currentPosition = position;
 		    ET.fire("POSITION_UPDATED");
 		    geo.helpers.debugMessage(geo.config.intervalCounter + " positie lat:" + geo.config.currentPosition.coords.latitude + " long:" + geo.config.currentPosition.coords.longitude);
@@ -130,41 +128,119 @@ var geo = geo || {};
 		    return Math.round(google.maps.geometry.spherical.computeDistanceBetween(pos1, pos2), 0);
 		},
 	}
+})();;// Namespace
+var geo = geo || {};
+
+(function(){
+	"use strict";
 
 	/**
-
-	*/
-	geo.map = {
-
-	}
-
-	/**
-
+	 Helpers
 	*/
 	geo.helpers = {
 
-		isNumber: function (n) {
+		isNumber: function( n ) {
   			return !isNaN(parseFloat(n)) && isFinite(n);
 		},
 
-		geo_error_handler: function (code, message) {
-    		debug_message('geo.js error: ' + code + ': ' + message);
+		geoErrorHandler: function( code, message ) {
+    		geo.helpers.debugMessage('geo.js error: ' + code + ': ' + message);
 		},
 
 		/**
 		 Debug message
 		*/
-		debugMessage: function(message) {
+		debugMessage: function( message ) {
     		(geo.config.customDebugging && geo.config.debugId) ? document.getElementById(geo.config.debugId).innerHTML : console.log(message);
 		},
 
 		/**
 		 setCustomDebugging
 		*/
-		setCustomDebugging: function(debugId){
+		setCustomDebugging: function( debugId ){
     		geo.config.debugId = this.debugId;
     		geo.condig.customDebugging = true;
 		}
 	}
 
+})();;// Namespace
+var geo = geo || {};
+
+(function() {
+	"use strict";
+
+	/**
+	 Map
+	*/
+	geo.map = {
+
+		routeList: [],
+		markerLatLng: false,
+		markerList: [],
+		marker: false,
+		generateMap: function( myOptions, canvasId ) {
+
+			// TODO: Kan ik hier asynchroon nog de google maps api aanroepen? dit scheelt calls
+		    geo.helpers.debugMessage("Genereer een Google Maps kaart en toon deze in #" + canvasId)
+		    geo.config.map = new google.maps.Map(document.getElementById(canvasId), myOptions);
+
+		    // Voeg de markers toe aan de map afhankelijk van het tourtype
+		    geo.helpers.debugMessage("Locaties intekenen, tourtype is: " + tourType);
+
+		    for (var i = 0; i < geo.config.locations.length; i++) {
+
+		        // Met kudos aan Tomas Harkema, probeer local storage, als het bestaat, voeg de geo.config.locations toe
+		        try {
+		            (localStorage.visited == undefined || geo.helpers.isNumber(localStorage.visited)) ? localStorage[geo.config.locations[i][0]] = false : null;
+		        } catch (error) {
+		            geo.helpers.debugMessage("Localstorage kan niet aangesproken worden: " + error);
+		        }
+
+		        this.markerLatLng = new google.maps.LatLng(geo.config.locations[i][3], geo.config.locations[i][4]);
+		        this.routeList.push(this.markerLatLng);
+
+		        this.markerList[i] = {};
+		        for (var attr in locatieMarker) {
+		            this.markerList[i][attr] = locatieMarker[attr];
+		        }
+
+		        this.markerList[i].scale = geo.config.locations[i][2]/3;
+
+		        this.marker = new google.maps.Marker({
+		            position: markerLatLng,
+		            map: map,
+		            icon: this.markerList[i],
+		            title: geo.config.locations[i][0]
+		        });
+		    }
+
+			// TODO: Kleur aanpassen op het huidige punt van de tour
+
+		    if(tourType == geo.config.lineair){
+		        // Trek lijnen tussen de punten
+		        geo.helpers.debugMessage("Route intekenen");
+
+		        var route = new google.maps.Polyline({
+		            clickable: false,
+		            map: map,
+		            path: routeList,
+		            strokeColor: 'Black',
+		            strokeOpacity: .6,
+		            strokeWeight: 3
+		        });
+
+		    }
+
+		    // Voeg de locatie van de persoon door
+		    currentPositionMarker = new google.maps.Marker({
+		        position: kaartOpties.center,
+		        map: map,
+		        icon: positieMarker,
+		        title: 'U bevindt zich hier'
+		    });
+
+		    // Zorg dat de kaart geupdated wordt als het POSITION_UPDATED event afgevuurd wordt
+		    ET.addListener(geo.config.positionUpdated, geo.gps.updatePosition);
+		}
+	}
 })();
