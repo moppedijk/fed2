@@ -29,7 +29,7 @@ var geo = geo || {};
 		*/
 		setCustomDebugging: function( debugId ){
     		geo.config.debugId = this.debugId;
-    		geo.condig.customDebugging = true;
+    		geo.config.customDebugging = true;
 		}
 	}
 

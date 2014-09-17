@@ -18,7 +18,7 @@ var geo = geo || {};
     		ET.addListener(geo.config.gpsUnavailable, function(){geo.helpers.debugMessage('Gps not available')});
 
     		(geo_position_js.init())?ET.fire(geo.config.gpsAvailable):ET.fire(geo.config.gpsUnavailable);	
-		},
+		}
 	}
 
 })();

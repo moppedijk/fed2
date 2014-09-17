@@ -8,11 +8,11 @@ var geo = geo || {};
 	 Map
 	*/
 	geo.map = {
-
 		routeList: [],
 		markerLatLng: false,
 		markerList: [],
 		marker: false,
+        currentPositionMarker: false,
 		generateMap: function( myOptions, canvasId ) {
 
 			// TODO: Kan ik hier asynchroon nog de google maps api aanroepen? dit scheelt calls
@@ -67,7 +67,7 @@ var geo = geo || {};
 		    }
 
 		    // Voeg de locatie van de persoon door
-		    currentPositionMarker = new google.maps.Marker({
+		    this.currentPositionMarker = new google.maps.Marker({
 		        position: kaartOpties.center,
 		        map: map,
 		        icon: positieMarker,
