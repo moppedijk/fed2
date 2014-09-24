@@ -12,18 +12,26 @@ module.exports = function(grunt) {
 	 		options: {
 	 			banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
 	 		},
-	 		custom: {
-	 			src: 'dest/js/main.js',
-	 			dest: 'dest/js/main.min.js'
+	 		app: {
+	 			src: 'dest/js/app.js',
+	 			dest: 'dest/js/app.min.js'
+	 		},
+	 		lib: {
+	 			src: 'dest/js/lib.js',
+	 			dest: 'dest/js/lib.min.js',
 	 		}
 	 	},
 	 	concat: {
 	 		options: {
 	 			separator: ';',
 	 		},
-	 		custom: {
-	 			src: 'static/js/*.js',
-	 			dest: 'dest/js/main.js',
+	 		app: {
+	 			src: ['static/js/app/app.js', 'static/js/app/router.js', 'static/js/app/views/*.js'],
+	 			dest: 'dest/js/app.js',
+	 		},
+	 		lib: {
+	 			src: 'static/js/lib/*.js',
+	 			dest: 'dest/js/lib.js',
 	 		},
 	 	},
 	 	compass: {
@@ -39,12 +47,13 @@ module.exports = function(grunt) {
       			// Task-specific options go here.
     		},
     		all: {
-      			src: 'static/css/*.css',
+      			src: ['static/css/layout.css', 'static/css/blocks/*.css'],
       			dest: 'dest/css/style.css',
     		},
   		},
   		clean: {
-  			css: 'static/css/',
+  			css: ['dest/css/', 'static/css/'],
+  			js: 'dest/js/',
   		},
   		watch: {
   			options: {
@@ -55,7 +64,7 @@ module.exports = function(grunt) {
   				tasks: 'update-css',
   			},
   			scripts: {
-  				files: 'static/js/**/*.js',
+  				files: ['static/js/app/**/*.js', 'static/js/lib/*.js'],
   				tasks: 'update-js',
   			},
   			templates: {
@@ -75,8 +84,8 @@ module.exports = function(grunt) {
 
 	/** Grunt tasks **/
 
-	grunt.registerTask('update-css', ['clean', 'compass', 'concat_css']);
-	grunt.registerTask('update-js', ['concat', 'uglify']);
+	grunt.registerTask('update-css', ['clean:css', 'compass', 'concat_css']);
+	grunt.registerTask('update-js', ['clean:js', 'concat:app', 'concat:lib', 'uglify:app', 'uglify:lib' ]);
 
 	grunt.registerTask('default', ['update-css', 'update-js']);
 	grunt.registerTask('development', ['update-css', 'update-js']);

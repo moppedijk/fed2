@@ -1,0 +1,12 @@
+/* Fonts */
+/* line 3, ../scss/layout.scss */
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* Wrapper */
+/* line 8, ../scss/layout.scss */
+.wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+}
