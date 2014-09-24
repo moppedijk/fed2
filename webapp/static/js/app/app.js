@@ -1,6 +1,7 @@
 var fedApp = fedApp || {};
 	fedApp.views = fedApp.views || {};
 	fedApp.config = fedApp.config || {};
+	fedApp.manager = fedApp.manager || {};
 
 (function(){
 	

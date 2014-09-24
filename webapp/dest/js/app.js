@@ -1,6 +1,7 @@
 var fedApp = fedApp || {};
 	fedApp.views = fedApp.views || {};
 	fedApp.config = fedApp.config || {};
+	fedApp.manager = fedApp.manager || {};
 
 (function(){
 	
@@ -19,6 +20,8 @@ var fedApp = fedApp || {};
 	
 	fedApp.router = {
 
+		currentView: false,
+
 		init: function () {
 			routie({
 				'': function() {
@@ -32,8 +35,12 @@ var fedApp = fedApp || {};
 				'about': function() {
 					console.log("show about");
 					fedApp.router.showAbout();
+				},
+				'contact': function() {
+					console.log("show Contact");
+					fedApp.router.showContact();
 				}
-			})
+			});
 		},
 		showHome: function () {
 			console.log("showHome");
@@ -48,6 +55,25 @@ var fedApp = fedApp || {};
 			var container = document.getElementById(fedApp.config.appId);
 
 			container.innerHTML = view();
+		},
+		showContact: function () {
+			console.log("showContact");
+			var view = new fedApp.views.Contact();
+			fedApp.router.showView(view);
+		},
+		showView: function (view) {
+			console.log("show View");
+
+			// Check if view is currtent vies, if true remove view
+			if(fedApp.router.currentView) {
+				//dispose view
+				console.log("remove view");
+			}
+
+			fedApp.router.currentView = view;
+
+			var container = document.getElementById(fedApp.config.appId);
+			container.innerHTML = fedApp.router.currentView.render();
 		}
 	}
 
@@ -72,6 +98,29 @@ var fedApp = fedApp || {};
 
 		}
 	}
+
+})();;// construcor object
+(function(){
+
+	var Contact = function() {
+
+		/*
+		 * Abstract view maken en een extensie maken van deze view 
+		 */
+		this.template = "template-contact";
+
+		this.render = function () {
+			console.log("render contact");
+			var templateId = document.getElementById( this.template );
+
+			var source   = templateId.innerHTML;
+			var template = Handlebars.compile( source );
+
+			return template();
+		};
+	};
+
+	fedApp.views.Contact = Contact;
 
 })();;(function(){
 
