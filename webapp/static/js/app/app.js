@@ -1,18 +1,23 @@
 var fedApp = fedApp || {};
-	fedApp.views = fedApp.views || {};
-	fedApp.config = fedApp.config || {};
-	fedApp.manager = fedApp.manager || {};
+	fedApp.helpers = fedApp.helpers || {};
+	fedApp.data = fedApp.data || {};
+	fedApp.views = fedApp.views || {};	
 
 (function(){
 	
 	fedApp.app = {
 
-		init: function (data) {
-			// load data
-			fedApp.config = data;
+		init: function () {
+			
+			fedApp.config = {
+				appId: "fed-app"
+			}
 
-			// start router
+			this.startApp();
+		},
+		startApp: function () {
 			fedApp.router.init();
+			console.log("router init");
 		}
 	}
 

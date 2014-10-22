@@ -1,0 +1,80 @@
+/* line 3, ../../scss/blocks/main.scss */
+.main__nav {
+  padding: 5px 10px;
+  border-bottom: solid 1px #000;
+  overflow: hidden;
+}
+/* line 8, ../../scss/blocks/main.scss */
+.main__nav-ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+}
+/* line 14, ../../scss/blocks/main.scss */
+.main__nav-ul a {
+  float: left;
+  padding: 5px 20px;
+  text-decoration: none;
+  background-color: #000;
+  color: #fff;
+  border-radius: 3px;
+  margin-right: 5px;
+}
+/* line 25, ../../scss/blocks/main.scss */
+.main__nav-link {
+  padding: 5px 20px 5px 10px;
+  float: left;
+}
+/* line 30, ../../scss/blocks/main.scss */
+.main__nav-plain {
+  padding: 5px 0px;
+}
+/* line 34, ../../scss/blocks/main.scss */
+.main__nav-left {
+  float: left;
+  width: 50%;
+}
+/* line 39, ../../scss/blocks/main.scss */
+.main__nav-right {
+  float: right;
+  width: 50%;
+  text-align: right;
+}
+/* line 46, ../../scss/blocks/main.scss */
+.main__filter {
+  padding: 5px 10px;
+}
+/* line 50, ../../scss/blocks/main.scss */
+.main__content {
+  padding: 5px 10px;
+  background-color: #d4d4d4;
+}
+/* line 54, ../../scss/blocks/main.scss */
+.main__content-inner {
+  overflow: hidden;
+  margin-left: -2%;
+}
+/* line 59, ../../scss/blocks/main.scss */
+.main__content-item {
+  float: left;
+  margin: 0 0 2% 2%;
+}
+/* line 64, ../../scss/blocks/main.scss */
+.main__content-item ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* line 70, ../../scss/blocks/main.scss */
+.main__content-item--small {
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-size: 10px;
+  height: 350px;
+  width: 23%;
+}
+/* line 78, ../../scss/blocks/main.scss */
+.main__content-item--large {
+  width: 98%;
+}

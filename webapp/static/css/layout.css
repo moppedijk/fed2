@@ -1,12 +1,44 @@
 /* Fonts */
 /* line 3, ../scss/layout.scss */
+html,
 body {
-  font-family: 'Open Sans', sans-serif;
+  height: 100%;
 }
 
-/* Wrapper */
 /* line 8, ../scss/layout.scss */
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+/* line 15, ../scss/layout.scss */
+p {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 20, ../scss/layout.scss */
+input {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+/* line 25, ../scss/layout.scss */
+input:focus {
+  outline: none;
+}
+
+/* line 30, ../scss/layout.scss */
 .wrapper {
-  max-width: 960px;
-  margin: 0 auto;
+  min-height: 100%;
+  margin-bottom: -62px;
+}
+
+/* line 35, ../scss/layout.scss */
+.wrapper:after {
+  content: "";
+  display: block;
+  height: 62px;
 }

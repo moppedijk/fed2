@@ -1,0 +1,14 @@
+/* line 3, ../../scss/blocks/form.scss */
+.form__label {
+  font-size: 14px;
+}
+/* line 7, ../../scss/blocks/form.scss */
+.form__input {
+  font-size: 14px;
+  padding: 0px 5px;
+}
+/* line 11, ../../scss/blocks/form.scss */
+.form__input-holder {
+  display: inline-block;
+  border: solid 1px #d4d4d4;
+}

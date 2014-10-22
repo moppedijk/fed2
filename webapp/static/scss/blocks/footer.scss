@@ -1,0 +1,13 @@
+.footer {
+	background-color: #1c1c1c;
+	padding: 20px;
+
+	&__content {
+		max-width: 960px;
+		margin: 0 auto;
+
+		p {
+			color: #fff;
+		}
+	}
+}

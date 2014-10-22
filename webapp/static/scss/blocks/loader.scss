@@ -1,0 +1,31 @@
+.loader {
+	-webkit-transform: opacity, 1s;
+	-moz-transform: opacity, 1s;
+	-o-transform: opacity, 1s;
+	transform: opacity, 1s;
+
+	background-color: rgba(255, 255, 255, 0.6);
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+
+	&__content {
+		color: #000;
+		text-align: center;
+		margin-top: 25%;
+		padding: 5px 10px;
+		border-radius: 3px;
+	}
+
+	&--isactive {
+		display: block;
+		opacity: 1;
+	}
+
+	&--inactive {
+		display: none;
+		opacity: 0;
+	}
+}

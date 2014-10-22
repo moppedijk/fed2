@@ -26,7 +26,7 @@ module.exports = function(grunt) {
 	 			separator: ';',
 	 		},
 	 		app: {
-	 			src: ['static/js/app/app.js', 'static/js/app/router.js', 'static/js/app/views/*.js'],
+	 			src: ['static/js/app/app.js', 'static/js/app/router.js', 'static/js/app/helpers/*.js', 'static/js/app/data/*.js', 'static/js/app/views/*.js'],
 	 			dest: 'dest/js/app.js',
 	 		},
 	 		lib: {

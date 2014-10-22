@@ -1,0 +1,83 @@
+.main {
+
+	&__nav {
+		padding: 5px 10px;
+		border-bottom: solid 1px #000;
+		overflow: hidden;
+
+		&-ul {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			overflow: hidden;
+
+			a {
+				float: left;
+				padding: 5px 20px;
+				text-decoration: none;
+				background-color: #000;
+				color: #fff;
+				border-radius: 3px;
+				margin-right: 5px;
+			}
+		}
+
+		&-link {
+			padding: 5px 20px 5px 10px;
+			float: left;
+		}
+
+		&-plain {
+			padding: 5px 0px;
+		}
+
+		&-left {
+			float: left;
+			width: 50%;
+		}
+
+		&-right {
+			float: right;
+			width: 50%;
+			text-align: right;
+		}
+	}
+
+	&__filter {
+		padding: 5px 10px;
+	}
+
+	&__content {
+		padding: 5px 10px;
+		background-color: #d4d4d4;
+
+		&-inner {
+			overflow: hidden;
+			margin-left: -2%;
+		}
+
+		&-item {
+			float: left;
+			margin: 0 0 2% 2%;
+			
+
+			ul {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			&--small {
+				overflow-x: hidden;
+				overflow-y: auto;
+				font-size: 10px;
+				height: 350px;
+				width: 23%;
+			}
+
+			&--large {
+				width: 98%;
+			}
+		}
+	}
+}

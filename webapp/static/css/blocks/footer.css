@@ -1,0 +1,14 @@
+/* line 1, ../../scss/blocks/footer.scss */
+.footer {
+  background-color: #1c1c1c;
+  padding: 20px;
+}
+/* line 5, ../../scss/blocks/footer.scss */
+.footer__content {
+  max-width: 960px;
+  margin: 0 auto;
+}
+/* line 9, ../../scss/blocks/footer.scss */
+.footer__content p {
+  color: #fff;
+}

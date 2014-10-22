@@ -1,24 +1,215 @@
 /* Fonts */
 /* line 3, ../scss/layout.scss */
+html,
 body {
-  font-family: 'Open Sans', sans-serif;
+  height: 100%;
 }
 
-/* Wrapper */
 /* line 8, ../scss/layout.scss */
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+/* line 15, ../scss/layout.scss */
+p {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 20, ../scss/layout.scss */
+input {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+/* line 25, ../scss/layout.scss */
+input:focus {
+  outline: none;
+}
+
+/* line 30, ../scss/layout.scss */
 .wrapper {
+  min-height: 100%;
+  margin-bottom: -62px;
+}
+
+/* line 35, ../scss/layout.scss */
+.wrapper:after {
+  content: "";
+  display: block;
+  height: 62px;
+}
+/* line 1, ../../scss/blocks/content.scss */
+.content {
   max-width: 960px;
   margin: 0 auto;
 }
+/* line 1, ../../scss/blocks/footer.scss */
+.footer {
+  background-color: #1c1c1c;
+  padding: 20px;
+}
+/* line 5, ../../scss/blocks/footer.scss */
+.footer__content {
+  max-width: 960px;
+  margin: 0 auto;
+}
+/* line 9, ../../scss/blocks/footer.scss */
+.footer__content p {
+  color: #fff;
+}
+/* line 3, ../../scss/blocks/form.scss */
+.form__label {
+  font-size: 14px;
+}
+/* line 7, ../../scss/blocks/form.scss */
+.form__input {
+  font-size: 14px;
+  padding: 0px 5px;
+}
+/* line 11, ../../scss/blocks/form.scss */
+.form__input-holder {
+  display: inline-block;
+  border: solid 1px #d4d4d4;
+}
 /* line 1, ../../scss/blocks/header.scss */
 .header {
-  margin: 20px 0px;
+  padding: 20px 0px;
+  background-color: #000;
 }
-/* line 7, ../../scss/blocks/header.scss */
-.header .global-navigation ul {
+/* line 6, ../../scss/blocks/header.scss */
+.header .global-nav {
+  margin: 0 auto;
+  max-width: 960px;
+}
+/* line 10, ../../scss/blocks/header.scss */
+.header .global-nav__ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+/* line 16, ../../scss/blocks/header.scss */
+.header .global-nav__ul li {
+  float: left;
+}
+/* line 19, ../../scss/blocks/header.scss */
+.header .global-nav__ul li a {
+  padding: 5px 10px;
+  text-decoration: none;
+  color: #fff;
+}
+/* line 1, ../../scss/blocks/loader.scss */
+.loader {
+  -webkit-transform: opacity, 1s;
+  -moz-transform: opacity, 1s;
+  -o-transform: opacity, 1s;
+  transform: opacity, 1s;
+  background-color: rgba(255, 255, 255, 0.6);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+/* line 14, ../../scss/blocks/loader.scss */
+.loader__content {
+  color: #000;
+  text-align: center;
+  margin-top: 25%;
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+/* line 22, ../../scss/blocks/loader.scss */
+.loader--isactive {
+  display: block;
+  opacity: 1;
+}
+/* line 27, ../../scss/blocks/loader.scss */
+.loader--inactive {
+  display: none;
+  opacity: 0;
+}
+/* line 3, ../../scss/blocks/main.scss */
+.main__nav {
+  padding: 5px 10px;
+  border-bottom: solid 1px #000;
+  overflow: hidden;
+}
+/* line 8, ../../scss/blocks/main.scss */
+.main__nav-ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+}
+/* line 14, ../../scss/blocks/main.scss */
+.main__nav-ul a {
+  float: left;
+  padding: 5px 20px;
+  text-decoration: none;
+  background-color: #000;
+  color: #fff;
+  border-radius: 3px;
+  margin-right: 5px;
+}
+/* line 25, ../../scss/blocks/main.scss */
+.main__nav-link {
+  padding: 5px 20px 5px 10px;
+  float: left;
+}
+/* line 30, ../../scss/blocks/main.scss */
+.main__nav-plain {
+  padding: 5px 0px;
+}
+/* line 34, ../../scss/blocks/main.scss */
+.main__nav-left {
+  float: left;
+  width: 50%;
+}
+/* line 39, ../../scss/blocks/main.scss */
+.main__nav-right {
+  float: right;
+  width: 50%;
+  text-align: right;
+}
+/* line 46, ../../scss/blocks/main.scss */
+.main__filter {
+  padding: 5px 10px;
+}
+/* line 50, ../../scss/blocks/main.scss */
+.main__content {
+  padding: 5px 10px;
+  background-color: #d4d4d4;
+}
+/* line 54, ../../scss/blocks/main.scss */
+.main__content-inner {
+  overflow: hidden;
+  margin-left: -2%;
+}
+/* line 59, ../../scss/blocks/main.scss */
+.main__content-item {
+  float: left;
+  margin: 0 0 2% 2%;
+}
+/* line 64, ../../scss/blocks/main.scss */
+.main__content-item ul {
+  margin: 0;
+  padding: 0;
   list-style: none;
 }
-/* line 11, ../../scss/blocks/header.scss */
-.header .global-navigation ul li a {
-  text-decoration: none;
+/* line 70, ../../scss/blocks/main.scss */
+.main__content-item--small {
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-size: 10px;
+  height: 350px;
+  width: 23%;
+}
+/* line 78, ../../scss/blocks/main.scss */
+.main__content-item--large {
+  width: 98%;
 }

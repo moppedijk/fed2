@@ -1,12 +1,27 @@
 /* line 1, ../../scss/blocks/header.scss */
 .header {
-  margin: 20px 0px;
+  padding: 20px 0px;
+  background-color: #000;
 }
-/* line 7, ../../scss/blocks/header.scss */
-.header .global-navigation ul {
+/* line 6, ../../scss/blocks/header.scss */
+.header .global-nav {
+  margin: 0 auto;
+  max-width: 960px;
+}
+/* line 10, ../../scss/blocks/header.scss */
+.header .global-nav__ul {
   list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
 }
-/* line 11, ../../scss/blocks/header.scss */
-.header .global-navigation ul li a {
+/* line 16, ../../scss/blocks/header.scss */
+.header .global-nav__ul li {
+  float: left;
+}
+/* line 19, ../../scss/blocks/header.scss */
+.header .global-nav__ul li a {
+  padding: 5px 10px;
   text-decoration: none;
+  color: #fff;
 }

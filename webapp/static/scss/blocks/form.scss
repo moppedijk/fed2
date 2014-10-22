@@ -1,0 +1,16 @@
+.form {
+	
+	&__label {
+		font-size: 14px;
+	}
+
+	&__input {
+		font-size: 14px;
+		padding: 0px 5px;
+
+		&-holder {
+			display: inline-block;
+			border: solid 1px #d4d4d4;
+		}
+	}
+}

@@ -1,11 +1,39 @@
 /* Fonts */
 
+html,
 body {
-	font-family: 'Open Sans', sans-serif;
+	height: 100%;
 }
 
-/* Wrapper */
+body {
+	font-family: 'Open Sans', sans-serif;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+p {
+	margin: 0;
+	padding: 0;
+}
+
+input {
+	margin: 0;
+	padding: 0;
+	border: none;
+
+	&:focus {
+		outline: none;
+	}
+}
+
 .wrapper {
-	max-width: 960px;
-	margin: 0 auto;
+	min-height: 100%;
+	margin-bottom: -62px;
+}
+
+.wrapper:after {
+	content: "";
+	display: block;
+	height: 62px;
 }
