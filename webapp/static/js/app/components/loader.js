@@ -1,6 +1,6 @@
 (function(){
 
-	fedApp.helpers.loader = {
+	FedApp.Components.Loader = {
 		loading: false,
 		show: function() {
 			var loader = document.getElementById("loader");
@@ -12,6 +12,7 @@
 		},
 		hide: function() {
 			var loader = document.getElementById("loader");
+			
 			if(loader.hasClass('loader--isactive') ) {
 				loader.addClass('loader--inactive');
 				loader.removeClass('loader--isactive');

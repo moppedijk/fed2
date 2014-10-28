@@ -27,7 +27,7 @@
 		<header id="header" class="header">
 			<nav class="global-nav">
 				<ul class="global-nav__ul">
-					<li><a href="#main">Main</a></li>
+					<li><a href="#home">Main</a></li>
 					<li><a href="#about">About</a></li>
 				</ul>
 			</nav>
@@ -51,7 +51,7 @@
   					<li><a title="Production" href="#main/production">Production</a></li>
   				</ul>
   			</div>
-  			<h1>Template main</h1>
+  			
   			<div id="main-content" class="main__content">
   				<p>Selecteer een categorie...</p>
   			</div>
@@ -75,8 +75,9 @@
   				<div class="form">
   					<label class="form__label" for="form__event-locality">In de buurt van</label>
   					<div class="form__input-holder">
-  						<input class="form__input" type="text" value="Utrecht">
+  						<input id="form-input-locality" class="form__input" type="text" placeholder="Bijv. Amsterdam">
   					</div>
+  					<a id="form-btn-submit" href="javascipt:void(0);" title="Submit">Zoek</a>
   				</div>
   			</div>
 
@@ -86,8 +87,9 @@
 		  				<div class="main__content-item main__content-item--small">
 		  					<h1>{{title}}</h1>
 		  					<ul>
-						  		<li><a href="#main/{{listType}}/{{cidn}}">cidn: {{cidn}}</a></li>
+						  		<li><a href="#main/{{listType}}/detail/{{cidn}}">cidn: {{cidn}}</a></li>
 						  		<li>created: {{created}}</li>
+						  		<li>description: {{description}}</li>
 						  		<li>disabilityInformation: {{disabilityInformation}}</li>
 						  		<li>homepage: {{homepage}}</li>
 						  		<li>locationAddress: {{locationAddress}}</li>
@@ -109,7 +111,7 @@
 		<div class="main">
 			<div class="main__nav">
   				<ul class="main__nav-ul">
-  					<li><a title="Events" href="#main/{{listType}}"><i class="fa fa-reply"></i> Terug - {{listType}}</a></li>
+  					<li><a title="{{listType}}" href="#main/{{listType}}"><i class="fa fa-reply"></i> Terug - {{listType}}</a></li>
   					<li><span class="main__nav-link">Cidn: {{cidn}}</span></li>
   				</ul>
 	  		</div>
@@ -174,7 +176,7 @@
 	<script>
 
 		(function(){
-			fedApp.app.init();
+			FedApp.App.init();
 		})();
 
 	</script>

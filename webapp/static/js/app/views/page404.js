@@ -1,8 +1,14 @@
 (function(){
 
-	var Page404 = function() {
+	var Page404 = function(obj) {
 
 		this.template = "template-404";
+
+		this.events = new Events();
+
+		this.init = function(obj) {
+			this.render();
+		}
 
 		this.render = function() {
 
@@ -13,8 +19,10 @@
 
 			return template();
 		}
+
+		this.init(obj);
 	}
 
-	fedApp.views.Page404 = Page404;
+	FedApp.Views.Page404 = Page404;
 
 })();

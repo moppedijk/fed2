@@ -1,22 +1,30 @@
 (function(){
 
-	var Main = function(data) {
+	var Main = function(obj) {
 
 		this.template = "template-main";
 
-		this.render = function() {
+		this.model = false;
 
-			console.log(data);
+		this.events = new Events();
+
+		this.init = function(obj) {
+			console.log("Initialize main");
+		};
+
+		this.render = function() {
 
 			var templateId = document.getElementById( this.template );
 
 			var source   = templateId.innerHTML;
 			var template = Handlebars.compile(source);
 
-			return template(data);
+			return template();
 		}
+
+		this.init(obj);
 	}
 
-	fedApp.views.Main = Main;
+	FedApp.Views.Main = Main;
 
 })();

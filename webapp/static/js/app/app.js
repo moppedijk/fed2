@@ -1,23 +1,26 @@
-var fedApp = fedApp || {};
-	fedApp.helpers = fedApp.helpers || {};
-	fedApp.data = fedApp.data || {};
-	fedApp.views = fedApp.views || {};	
+var FedApp = FedApp || {};
+	FedApp.Components = FedApp.Components || {};
+	FedApp.Models = FedApp.Models || {};
+	FedApp.Views = FedApp.Views || {};	
 
 (function(){
 	
-	fedApp.app = {
+	/**
+	 	Controller object that initializes the application
+	*/
+	FedApp.App = {
 
 		init: function () {
+			console.log("Initialize App");
 			
-			fedApp.config = {
+			FedApp.Config = {
 				appId: "fed-app"
 			}
 
 			this.startApp();
 		},
 		startApp: function () {
-			fedApp.router.init();
-			console.log("router init");
+			FedApp.Router.init();
 		}
 	}
 

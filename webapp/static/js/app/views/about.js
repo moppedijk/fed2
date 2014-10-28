@@ -1,8 +1,16 @@
 (function() {
 
-	var About = function () {
+	var About = function (data) {
 
 		this.template = "template-about";
+
+		this.model = false;
+
+		this.events = new Events();
+
+		this.init = function(data) {
+			console.log("Initalize About");
+		};
 
 		this.render = function () {
 			var templateId = document.getElementById( this.template );
@@ -12,8 +20,10 @@
 
 			return template();
 		}
+
+		this.init(data);
 	}
 
-	fedApp.views.About = About;
+	FedApp.Views.About = About;
 
 })();
