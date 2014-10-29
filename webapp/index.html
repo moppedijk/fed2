@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
 	<title>Web App | Fed 2</title>
 	
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<!-- static assets -->
 	<link rel="stylesheet" type="text/css" href="dest/css/style.css" media="screen, handheld" />
@@ -26,9 +26,9 @@
 	<div class="wrapper">
 		<header id="header" class="header">
 			<nav class="global-nav">
-				<ul class="global-nav__ul">
-					<li><a href="#home">Main</a></li>
-					<li><a href="#about">About</a></li>
+				<ul id="global-nav" class="global-nav__ul">
+					<li class="list--home"><a title="home" href="#home"><i class="fa fa-home"></i></a></li>
+					<li class="list--about"><a title="about" href="#about">About</a></li>
 				</ul>
 			</nav>
 		</header>
@@ -43,63 +43,66 @@
 
 	<!-- Templates  -->
 	<script id="template-main" type="text/x-handlebars-template">
-		<section class="main">
+		<div class="main">
 			<div class="main__nav">
-  				<ul class="main__nav-ul">
-  					<li><a title="Events" href="#main/event">Events</a></li>
-  					<li><a title="Venue" href="#main/venue">Venue</a></li>
-  					<li><a title="Production" href="#main/production">Production</a></li>
+  				<ul id="main-nav" class="main__nav-ul">
+  					<!--li class="list--event"><a title="Evenementen" href="#main/event">Evenementen</a></li-->
+  					<li class="list--venue"><a title="Venues" href="#main/venue">Venues</a></li>
+  					<li class="list--production"><a title="Producties" href="#main/production">Producties</a></li>
   				</ul>
   			</div>
-  			
-  			<div id="main-content" class="main__content">
-  				<p>Selecteer een categorie...</p>
-  			</div>
-		</section>
+  			<div id="main-content" class="main__content"></div>
+		</div>
+	</script>
+
+	<script id="template-home" type="text/x-handlebars-home">
+		<div id="home-view" class="home">
+			<h1>Hi!</h1>
+			<p>Selecteer een categorie...</p>
+		</div>
 	</script>
 
 	<script id="template-list" type="text/x-handlebars-template">
-  		<div id="list-view" class="main">
-  			<div class="main__nav">
-  				<ul class="main__nav-ul main__nav-left">
-  					<li><a title="Events" href="#main/event">Events</a></li>
-  					<li><a title="Venue" href="#main/venue">Venue</a></li>
-  					<li><a title="Production" href="#main/production">Production</a></li>
-  				</ul>
-  				<div class="main__nav-plain main__nav-right">
-  					<p>Page: {{metadata.page}} | Per Page: {{metadata.per_page}}</p>
-  				</div>
-  			</div>
-
+  		<div id="list-view">
   			<div class="main__filter">
-  				<div class="form">
-  					<label class="form__label" for="form__event-locality">In de buurt van</label>
-  					<div class="form__input-holder">
-  						<input id="form-input-locality" class="form__input" type="text" placeholder="Bijv. Amsterdam">
+  				<div class="main__filter-left">
+	  				<div class="form">
+	  					<label class="form__label" for="form__event-locality">In de buurt van</label>
+	  					<div class="form__input-holder">
+	  						<input id="form-input-locality" name="form-input-locality" class="form__input" type="text" placeholder="Bijv. Amsterdam">
+	  					</div>
+	  					<a class="form__submit-btn" id="form-btn-submit" href="javascipt:void(0);" title="Submit"><i class="fa fa-search"></i></a>
+	  				</div>
+  				</div>
+  				<div class="main__filter-right">
+  					<div class="main__nav-plain main__nav-right">
+  						<p><i class="fa fa-file"></i> {{metadata.page}} | <i class="fa fa-th"></i> {{metadata.per_page}}</p>
   					</div>
-  					<a id="form-btn-submit" href="javascipt:void(0);" title="Submit">Zoek</a>
   				</div>
   			</div>
 
-  			<div class="main__content">
-  				<div class="main__content-inner">
+  			<div class="main__list">
+  				<div class="main__list-inner">
 		  			{{#each results}}
-		  				<div class="main__content-item main__content-item--small">
-		  					<h1>{{title}}</h1>
-		  					<ul>
-						  		<li><a href="#main/{{listType}}/detail/{{cidn}}">cidn: {{cidn}}</a></li>
-						  		<li>created: {{created}}</li>
-						  		<li>description: {{description}}</li>
-						  		<li>disabilityInformation: {{disabilityInformation}}</li>
-						  		<li>homepage: {{homepage}}</li>
-						  		<li>locationAddress: {{locationAddress}}</li>
-						  		<li>modified: {{monified}}</li>
-						  		<li>sameAs: {{sameAs}}</li>
-						  		<li>telephone: {{telephone}}</li>
-						  		<li>type: {{type}}</li>
-						  		<li>uri: {{uri}}</li>
-						  		<li>venueType: {{venueType}}</li>
-						  	</ul>
+		  				<div class="main__list-item main__list-item--small">
+		  					<div class="item">
+			  					<div class="item__header">
+			  						<a href="#main/{{listType}}/detail/{{cidn}}"><h1>{{title}}</h1></a>
+			  					</div>
+			  					<div class="item__content">
+			  						<div class="item__date"><i class="fa fa-clock-o"></i> {{created}}</div>
+			  						<div class="item__desc">
+			  							{{shortDescription}}
+			  						</div>
+			  						<div class="item__content-other">
+			  							{{otherContent}}
+			  						</div>
+							  	</div>
+							  	<div class="item__func">
+							  		<div class="item__func-left"></div>
+							  		<div class="item__func-right"><i class="fa fa-angle-down"></i></div>
+							  	</div>
+						  	</div>
 					  	</div>
 					{{/each}}
 				</div>
@@ -111,41 +114,45 @@
 		<div class="main">
 			<div class="main__nav">
   				<ul class="main__nav-ul">
-  					<li><a title="{{listType}}" href="#main/{{listType}}"><i class="fa fa-reply"></i> Terug - {{listType}}</a></li>
-  					<li><span class="main__nav-link">Cidn: {{cidn}}</span></li>
+  					<li><a title="Terug" href="#main/venue"><i class="fa fa-reply"></i> Terug</a></li>
   				</ul>
 	  		</div>
+	  		<div id="main-content" class="main__content">
+	  	</div>
+	 </script>
 
-	  		<div class="main__content">
-	  			<div class="main__content-inner">
-	  				<div class="main__content-item main__content-item--large">
-						<h1>Title: {{title}}</h1>
-						<ul>
-							<li>attatchment: {{attatchment}}</li>
-							<li>cidn: {{cidn}}</li>
-							<li>description: {{description}}</li>
-							<li>eventStatus: {{eventStatus}}</li>
-							<li>hasBeginning: {{hasBeginning}}</li>
-							<li>hasEnd: {{hasEnd}}</li>
-							<li>modified: {{modified}}</li>
-							<li>offer: {{offers}}</li>
-							<li>productions: {{productions}}</li>
-							<li>sameAs: {{sameAs}}</li>
-							<li>type: {{type}}</li>
-							<li>uri: {{uri}}</li>
-							<li>venue: {{venue}}</li>
-						</ul>
-						<div>
-							<ul>
-								<li><a target="_blank" href="http://api.artsholland.com/rest/event/{{cidn}}/venue.json">Venues in which event {{cidn}} takes place</a></li>
-								<li><a target="_blank" href="http://api.artsholland.com/rest/event/{{cidn}}/production.json">Productions associated with the event {{cidn}}</a></li>
-								<li><a target="_blank" href="http://api.artsholland.com/rest/event/{{cidn}}/room.json">Rooms in which event {{cidn}} takes place</a></li>
-								<li><a target="_blank" href="http://api.artsholland.com/rest/event/{{cidn}}/attatchment.json">Attatchments associated with event {{cidn}}</a></li>
-								<li><a target="_blank" href="http://api.artsholland.com/rest/event/{{cidn}}/offering.json">Offers available for event {{cidn}}</a></li>
-								<li><a target="_blank" href="http://api.artsholland.com/rest/event/{{cidn}}/offering/offering-name/price.json">Price specification of offer [name]</a></li>
-							</ul>
+	 <script id="template-event-detail" type="text/x-handlebars-template">
+		<div class="event-detail">
+			<h1>Event Detail</h1>
+			<p>{{cidn}}</p>
+			<p>{{description}}</p>
+			<p>{{hasBeginning}}</p>
+			<p>{{hasEnd}}</p>
+	  	</div>
+	 </script>
+
+	<script id="template-venue-detail" type="text/x-handlebars-template">
+		<div id="venue-detail" class="venue">
+			<div class="venue__header">
+				<h1>{{venue.title}}</h1>
+			</div>
+			<div class="venue__introduction">
+				<p>{{venue.description}}</p>
+			</div>
+			<div class="venue__header">
+				<h1>Evenementen van {{venue.title}}</h1>
+			</div>
+			<div class="venue__list">
+				<div class="venue__list-inner">
+					{{#each events}}
+						<div class="venue__list-item">
+							<p>Id: <a href="#main/event/detail/{{cidn}}">{{cidn}}</a></p>
+							<p>Created: {{created}}</p>
+							<p>Description: {{description}}</p>
+							<p>Begint op: {{hasBeginning}}</p>
+							<p>Eindigt op: {{hasEnd}}</p>
 						</div>
-					</div>
+					{{/each}}
 				</div>
 			</div>
 		</div>

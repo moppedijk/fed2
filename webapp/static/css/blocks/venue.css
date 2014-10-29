@@ -1,0 +1,54 @@
+/* line 3, ../../scss/blocks/venue.scss */
+.venue__header {
+  background-color: #d4d4d4;
+  overflow: hidden;
+  margin: 20px 10px 0px;
+}
+/* line 8, ../../scss/blocks/venue.scss */
+.venue__header h1 {
+  margin: 10px;
+  font-size: 15px;
+}
+/* line 14, ../../scss/blocks/venue.scss */
+.venue__introduction {
+  padding: 20px 10px;
+  border-bottom: solid 1px #000;
+  margin-bottom: 20px;
+}
+/* line 19, ../../scss/blocks/venue.scss */
+.venue__introduction p {
+  font-size: 12px;
+}
+/* line 24, ../../scss/blocks/venue.scss */
+.venue__list {
+  padding: 20px 10px;
+}
+/* line 27, ../../scss/blocks/venue.scss */
+.venue__list-inner {
+  overflow: hidden;
+  margin-left: -2%;
+}
+/* line 32, ../../scss/blocks/venue.scss */
+.venue__list-item {
+  float: left;
+  margin: 0 0 20px 2%;
+  width: 48%;
+}
+/* line 38, ../../scss/blocks/venue.scss */
+.venue__list-item ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (max-width: 700px) {
+  /* line 32, ../../scss/blocks/venue.scss */
+  .venue__list-item {
+    width: 98%;
+  }
+}
+/* line 50, ../../scss/blocks/venue.scss */
+.venue__event {
+  border: solid 1px #d4d4d4;
+  padding: 5px;
+  font-size: 12px;
+}

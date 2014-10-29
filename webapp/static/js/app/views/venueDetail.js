@@ -1,22 +1,23 @@
 (function(){
 
-	var Main = function(obj) {
+	var VenueDetail = function(data) {
 
-		this.template = "template-main";
+		this.template = "template-detail";
 
-		this.subTemplate = "template-home";
+		this.subTemplate = "template-venue-detail";
 
 		this.model = false;
 
 		this.events = new Events();
 
-		this.init = function(obj) {
-			console.log("Initialize main");
+		this.init = function(data) {
+			console.log("Initialize VenueDetail View");
+			this.model = data;
 		};
 
 		this.render = function() {
 
-			var templateId = document.getElementById(this.template);
+			var templateId = document.getElementById( this.template );
 			var source   = templateId.innerHTML;
 			var template = Handlebars.compile(source);
 
@@ -24,18 +25,20 @@
 		};
 
 		this.afterRender = function() {
-			
 			var templateId = document.getElementById(this.subTemplate);
 			var source   = templateId.innerHTML;
 			var template = Handlebars.compile(source);
 			var subView = document.getElementById("main-content");
-				subView.innerHTML = template();
+				subView.innerHTML = template(this.model);
+		}
+
+		this.dispose = function() {
 
 		};
 
-		this.init(obj);
-	}
+		this.init(data);
+	};
 
-	FedApp.Views.Main = Main;
+	FedApp.Views.VenueDetail = VenueDetail;
 
 })();

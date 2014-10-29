@@ -1,9 +1,9 @@
 /* line 1, ../../scss/blocks/loader.scss */
 .loader {
-  -webkit-transform: opacity, 1s;
-  -moz-transform: opacity, 1s;
-  -o-transform: opacity, 1s;
-  transform: opacity, 1s;
+  -webkit-transition: opacity 0.3s;
+  -moz-transition: opacity 0.3s;
+  -o-transition: opacity 0.3s;
+  transition: opacity 0.3s;
   background-color: rgba(255, 255, 255, 0.6);
   position: fixed;
   width: 100%;
@@ -13,19 +13,34 @@
 }
 /* line 14, ../../scss/blocks/loader.scss */
 .loader__content {
+  -webkit-transition: margin 0.3s;
+  -moz-transition: margin 0.3s;
+  -o-transition: margin 0.3s;
+  transition: margin 0.3s;
   color: #000;
   text-align: center;
-  margin-top: 25%;
-  padding: 5px 10px;
-  border-radius: 3px;
+  padding: 30px 10px;
+  border-radius: 5px;
+  background-color: #fff;
+  margin-top: 0%;
+  width: 200px;
+  margin: 25% auto 0;
 }
-/* line 22, ../../scss/blocks/loader.scss */
+/* line 30, ../../scss/blocks/loader.scss */
 .loader--isactive {
-  display: block;
   opacity: 1;
+  visibility: visible;
 }
-/* line 27, ../../scss/blocks/loader.scss */
+/* line 35, ../../scss/blocks/loader.scss */
+.loader--isactive .loader__content {
+  margin: 25% auto 0;
+}
+/* line 40, ../../scss/blocks/loader.scss */
 .loader--inactive {
-  display: none;
   opacity: 0;
+  visibility: hidden;
+}
+/* line 45, ../../scss/blocks/loader.scss */
+.loader--inactive .loader__content {
+  margin: 0% auto 0;
 }

@@ -1,0 +1,42 @@
+/* line 2, ../../scss/blocks/item.scss */
+.item__header {
+  background-color: #d4d4d4;
+}
+/* line 6, ../../scss/blocks/item.scss */
+.item__header a {
+  overflow: hidden;
+  color: #000;
+  text-decoration: none;
+}
+/* line 12, ../../scss/blocks/item.scss */
+.item__header h1 {
+  margin: 0px;
+  padding: 10px;
+  font-size: 14px;
+}
+/* line 19, ../../scss/blocks/item.scss */
+.item__content {
+  border: solid 1px #d4d4d4;
+  padding: 10px;
+  font-size: 12px;
+  min-height: 65px;
+}
+/* line 27, ../../scss/blocks/item.scss */
+.item__date {
+  padding-bottom: 5px;
+}
+/* line 31, ../../scss/blocks/item.scss */
+.item__func {
+  border-bottom: solid 3px #d4d4d4;
+  overflow: hidden;
+}
+/* line 35, ../../scss/blocks/item.scss */
+.item__func-left {
+  float: left;
+  text-align: left;
+}
+/* line 39, ../../scss/blocks/item.scss */
+.item__func-right {
+  float: right;
+  text-align: right;
+}

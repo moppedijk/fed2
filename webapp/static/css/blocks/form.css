@@ -1,14 +1,49 @@
 /* line 3, ../../scss/blocks/form.scss */
 .form__label {
   font-size: 14px;
+  margin-right: 5px;
+  font-style: italic;
 }
-/* line 7, ../../scss/blocks/form.scss */
+@media (max-width: 530px) {
+  /* line 10, ../../scss/blocks/form.scss */
+  .form__label {
+    display: none;
+  }
+}
+/* line 15, ../../scss/blocks/form.scss */
 .form__input {
   font-size: 14px;
-  padding: 0px 5px;
+  padding: 5px 2%;
+  width: 96%;
 }
-/* line 11, ../../scss/blocks/form.scss */
+/* line 20, ../../scss/blocks/form.scss */
 .form__input-holder {
   display: inline-block;
   border: solid 1px #d4d4d4;
+  margin-right: 5px;
+}
+@media (max-width: 530px) {
+  /* line 27, ../../scss/blocks/form.scss */
+  .form__input-holder {
+    width: 75%;
+    margin-right: 2%;
+  }
+}
+/* line 34, ../../scss/blocks/form.scss */
+.form__submit-btn {
+  text-decoration: none;
+  background-color: #d4d4d4;
+  color: #fff;
+  font-size: 14px;
+  padding: 5px 10px;
+}
+/* line 41, ../../scss/blocks/form.scss */
+.form__submit-btn:hover {
+  background-color: #000;
+}
+@media (max-width: 530px) {
+  /* line 47, ../../scss/blocks/form.scss */
+  .form__submit-btn {
+    width: 18%;
+  }
 }

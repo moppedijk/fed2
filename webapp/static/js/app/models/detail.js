@@ -1,6 +1,6 @@
 (function(){
 	
-	var SingleObject = function(data) {
+	var Detail = function(data) {
 
 		this.path = "http://api.artsholland.com/rest";
 
@@ -91,6 +91,6 @@
 		this.init(data);
 	}
 
-	FedApp.Models.SingleObject = SingleObject;
+	FedApp.Models.Detail = Detail;
 
 })();

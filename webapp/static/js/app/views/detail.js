@@ -4,6 +4,8 @@
 
 		this.template = "template-detail";
 
+		this.subTemplate = "template-event-detail";
+
 		this.model = false;
 
 		this.events = new Events();
@@ -16,15 +18,18 @@
 		this.render = function() {
 
 			var templateId = document.getElementById( this.template );
-
 			var source   = templateId.innerHTML;
 			var template = Handlebars.compile(source);
 
-			return template(this.model)
+			return template();
 		};
 
 		this.afterRender = function() {
-			console.log("afterRender");
+			var templateId = document.getElementById(this.subTemplate);
+			var source   = templateId.innerHTML;
+			var template = Handlebars.compile(source);
+			var subView = document.getElementById("main-content");
+				subView.innerHTML = template(this.model);
 		}
 
 		this.dispose = function() {

@@ -1,6 +1,6 @@
 /* line 3, ../../scss/blocks/main.scss */
 .main__nav {
-  padding: 5px 10px;
+  padding: 20px 10px;
   border-bottom: solid 1px #000;
   overflow: hidden;
 }
@@ -9,72 +9,106 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  overflow: hidden;
 }
-/* line 14, ../../scss/blocks/main.scss */
+/* line 13, ../../scss/blocks/main.scss */
+.main__nav-ul li {
+  float: left;
+}
+/* line 17, ../../scss/blocks/main.scss */
 .main__nav-ul a {
   float: left;
   padding: 5px 20px;
   text-decoration: none;
-  background-color: #000;
+  background-color: #5d5d5d;
   color: #fff;
   border-radius: 3px;
   margin-right: 5px;
 }
-/* line 25, ../../scss/blocks/main.scss */
+@media (max-width: 395px) {
+  /* line 28, ../../scss/blocks/main.scss */
+  .main__nav-ul li {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  /* line 33, ../../scss/blocks/main.scss */
+  .main__nav-ul a {
+    display: block;
+    float: none;
+    margin-right: 0px;
+  }
+}
+/* line 41, ../../scss/blocks/main.scss */
 .main__nav-link {
   padding: 5px 20px 5px 10px;
   float: left;
 }
-/* line 30, ../../scss/blocks/main.scss */
+/* line 46, ../../scss/blocks/main.scss */
 .main__nav-plain {
-  padding: 5px 0px;
+  padding: 6px 0 0;
+  font-size: 14px;
 }
-/* line 34, ../../scss/blocks/main.scss */
-.main__nav-left {
+/* line 53, ../../scss/blocks/main.scss */
+.main__nav--event .list--event a {
+  background-color: #000;
+}
+/* line 60, ../../scss/blocks/main.scss */
+.main__nav--venue .list--venue a {
+  background-color: #000;
+}
+/* line 67, ../../scss/blocks/main.scss */
+.main__nav--production .list--production a {
+  background-color: #000;
+}
+/* line 74, ../../scss/blocks/main.scss */
+.main__filter {
+  overflow: hidden;
+  border-bottom: solid 1px #000;
+  padding: 20px 10px;
+}
+/* line 79, ../../scss/blocks/main.scss */
+.main__filter-left {
   float: left;
-  width: 50%;
+  width: 70%;
 }
-/* line 39, ../../scss/blocks/main.scss */
-.main__nav-right {
+/* line 84, ../../scss/blocks/main.scss */
+.main__filter-right {
   float: right;
-  width: 50%;
+  width: 30%;
   text-align: right;
 }
-/* line 46, ../../scss/blocks/main.scss */
-.main__filter {
-  padding: 5px 10px;
+/* line 91, ../../scss/blocks/main.scss */
+.main__list {
+  padding: 20px 10px;
 }
-/* line 50, ../../scss/blocks/main.scss */
-.main__content {
-  padding: 5px 10px;
-  background-color: #d4d4d4;
-}
-/* line 54, ../../scss/blocks/main.scss */
-.main__content-inner {
+/* line 94, ../../scss/blocks/main.scss */
+.main__list-inner {
   overflow: hidden;
   margin-left: -2%;
 }
-/* line 59, ../../scss/blocks/main.scss */
-.main__content-item {
+/* line 99, ../../scss/blocks/main.scss */
+.main__list-item {
   float: left;
-  margin: 0 0 2% 2%;
+  margin: 0 0 20px 2%;
 }
-/* line 64, ../../scss/blocks/main.scss */
-.main__content-item ul {
+/* line 104, ../../scss/blocks/main.scss */
+.main__list-item ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-/* line 70, ../../scss/blocks/main.scss */
-.main__content-item--small {
+/* line 110, ../../scss/blocks/main.scss */
+.main__list-item--small {
   overflow-x: hidden;
   overflow-y: auto;
-  font-size: 10px;
-  height: 350px;
-  width: 23%;
+  width: 48%;
 }
-/* line 78, ../../scss/blocks/main.scss */
-.main__content-item--large {
+@media (max-width: 700px) {
+  /* line 99, ../../scss/blocks/main.scss */
+  .main__list-item {
+    width: 98%;
+  }
+}
+/* line 120, ../../scss/blocks/main.scss */
+.main__list-item--large {
   width: 98%;
 }

@@ -36,27 +36,35 @@ var FedApp = FedApp || {};
 				'': function() {
 					console.log("empty");
 					FedApp.Components.Loader.show();
-					FedApp.Router.showMain();
+					setTimeout(function(){
+						FedApp.Router.showMain();
+					}, 300);
 				},
 				'/home': function() {
 					console.log("/home");
 					FedApp.Components.Loader.show();
-					FedApp.Router.showMain();
+					setTimeout(function(){
+						FedApp.Router.showMain();
+					}, 300);
 				},
 				'/about': function() {
 					console.log("/about");
 					FedApp.Components.Loader.show();
-					FedApp.Router.showAbout();
+					setTimeout(function(){
+						FedApp.Router.showAbout();
+					}, 300);
 				},
 				'/main':{
 					'/:type': {
 						on: function(type) {
 							console.log("main/" + type);
 							FedApp.Components.Loader.show();
-							FedApp.Router.showList({
-								type: type,
-								locality: false
-							});
+							setTimeout(function(){
+								FedApp.Router.showList({
+									type: type,
+									locality: false
+								});
+							}, 300);
 						}
 					}
 				},
@@ -65,22 +73,51 @@ var FedApp = FedApp || {};
 						on: function(type, search) {
 							console.log("/main/" + type + "/search/" + search);
 							FedApp.Components.Loader.show();
-							FedApp.Router.showList({
-								type: type,
-								locality: search
-							});
+							setTimeout(function(){
+								FedApp.Router.showList({
+									type: type,
+									locality: search
+								});
+							}, 300);
 						}
 					}
 				},
-				'/main/:type/detail': {
+				'/main/venue/detail': {
 					'/:cidn': {
-						on: function(type, cidn) {
-							console.log("/main/:" + type + "/detail/" + cidn);
+						on: function(cidn) {
+							console.log("/main/venue/detail/" + cidn);
 							FedApp.Components.Loader.show();
-							FedApp.Router.showDetail({
-								type: type,
-								cidn: cidn
-							});
+							setTimeout(function(){
+								FedApp.Router.showVenueDetail(cidn);
+							}, 300);
+						}
+					}
+				},
+				'/main/production/detail': {
+					'/:cidn': {
+						on: function(cidn) {
+							console.log("/main/production/detail/" + cidn);
+							FedApp.Components.Loader.show();
+							setTimeout(function(){
+								FedApp.Router.showDetail({
+									type: "production",
+									cidn: cidn
+								});
+							}, 300);
+						}
+					}
+				},
+				'/main/event/detail': {
+					'/:cidn': {
+						on: function(cidn) {
+							console.log("/main/event/detail/" + cidn);
+							FedApp.Components.Loader.show();
+							setTimeout(function(){
+								FedApp.Router.showDetail({
+									type: "event",
+									cidn: cidn
+								});
+							}, 300);
 						}
 					}
 				},
@@ -99,6 +136,7 @@ var FedApp = FedApp || {};
 			var view = new FedApp.Views.Main();
 
 			FedApp.Router.showView(view);
+			FedApp.Router.showMenuState("home");
 		},
 		showList: function(obj) {
 			console.log("show list");
@@ -121,30 +159,42 @@ var FedApp = FedApp || {};
 
 				var view = new FedApp.Views.List(data);
 				FedApp.Router.showView(view);
+				FedApp.Router.showMenuState(obj.type);
 
 				listModel.events.off("loadDataComplete");
 			});
 
 		},
+		showVenueDetail: function(cidn) {
+			var venueDetail = new FedApp.Models.VenueDetail();
+
+			venueDetail.get(cidn);
+			venueDetail.events.on("loadDataComplete", function(data){
+				var view = new FedApp.Views.VenueDetail(data);
+				FedApp.Router.showView(view);
+
+				venueDetail.events.off("loadDataComplete");
+			});
+		},
 		showDetail: function(obj) {
 			console.log("show detail");
 
 			// Load Data
-			var singleObject = new FedApp.Models.SingleObject();
+			var detail = new FedApp.Models.Detail();
 
-			singleObject.get({
+			detail.get({
 				type: obj.type,
 				cidn: obj.cidn
 			})
 
-			singleObject.events.on("loadDataComplete", function(data){
+			detail.events.on("loadDataComplete", function(data){
 
 				console.log(data);
 
 				var view = new FedApp.Views.Detail(data);
 				FedApp.Router.showView(view);
 
-				singleObject.events.off("loadDataComplete");
+				detail.events.off("loadDataComplete");
 			});
 		},
 		showAbout: function () {
@@ -152,7 +202,8 @@ var FedApp = FedApp || {};
 
 			var view = new FedApp.Views.About();
 			
-			this.showView(view);
+			FedApp.Router.showView(view);
+			FedApp.Router.showMenuState("about");
 		},
 		showPage404: function () {
 			console.log("show Page404");
@@ -163,7 +214,7 @@ var FedApp = FedApp || {};
 
 			view.events.on("load404Complete", function(view){
 
-				this.showView(view);
+				FedApp.Router.showView(view);
 			});
 		},
 		showView: function (view) {
@@ -179,6 +230,108 @@ var FedApp = FedApp || {};
 
 			// Hide Loader
 			FedApp.Components.Loader.hide();
+		},
+		showMenuState: function(view) {
+			var globalNav = document.getElementById("global-nav");
+			var globalNavItems = new Array("global-nav--home", "global-nav--about");
+			var mainNav = document.getElementById("main-nav");
+			var mainNavItems = new Array("main__nav--event", "main__nav--venue", "main__nav--production");
+
+			switch(view) {
+				case "home":
+					FedApp.Router.setMenuState({
+						items: globalNavItems,
+						active: "global-nav--home",
+						target: globalNav
+					});
+					break;
+				case "about":
+					FedApp.Router.setMenuState({
+						items: globalNavItems,
+						active: "global-nav--about",
+						target: globalNav
+					});
+					break;
+				case "event":
+					FedApp.Router.setMenuState({
+						items: mainNavItems,
+						active: "main__nav--event",
+						target: mainNav
+					});
+					FedApp.Router.setMenuState({
+						items: globalNavItems,
+						active: false,
+						target: globalNav
+					});
+					break;
+				case "venue":
+					FedApp.Router.setMenuState({
+						items: mainNavItems,
+						active: "main__nav--venue",
+						target: mainNav
+					});
+					FedApp.Router.setMenuState({
+						items: globalNavItems,
+						active: false,
+						target: globalNav
+					});
+					break;
+				case "production":
+					FedApp.Router.setMenuState({
+						items: mainNavItems,
+						active: "main__nav--production",
+						target: mainNav
+					});
+					FedApp.Router.setMenuState({
+						items: globalNavItems,
+						active: false,
+						target: globalNav
+					});
+					break;
+			}
+		},
+		setMenuState: function(obj) {
+			for(var i = 0;i < obj.items.length; i++) {
+				if(obj.target.hasClass(obj.items[i])){
+					obj.target.removeClass(obj.items[i]);
+				}
+				if(obj.active) {
+					obj.target.addClass(obj.active);
+				}
+			}
+		}
+	}
+
+})();;(function(){
+
+	FedApp.Components.Filter = {
+		removeHtml: function(string) {
+		 	if(string){
+		 		var str = JSON.stringify(string);
+		 	 	var strInputCode = str.replace(/&(lt|gt);/g, function (strMatch, p1){
+		 		 	return (p1 == "lt")? "<" : ">";
+		 		});
+		 		var strTagStrippedText = strInputCode.replace(/<\/?[^>]+(>|$)/g, "");
+		 		str = strTagStrippedText;
+		 	}
+			return str;
+		},
+		trimString: function(string, number) {
+
+			var str = string;
+			var subStr = "";
+
+			if(str.length > number) {
+				subStr = str.substring(0, number);
+			}else {
+				subStr = str;
+			}
+
+			return subStr;
+		},
+		createStringFromObject: function(obj) {
+
+			return string;
 		}
 	}
 
@@ -205,105 +358,8 @@ var FedApp = FedApp || {};
 	}
 
 })();;(function(){
-
-	var List = function() {
-
-		this.path = "http://api.artsholland.com/rest";
-
-		this.events = new Events();
-
-		this.init = function() {
-			console.log("Initialize List model");
-		}
-
-		this.get = function(obj) {
-
-			var _self = this;
-			var type = obj.type;
-			if(!obj.params.locality)
-				obj.params.locality = "amsterdam";
-
-			var params = obj.params;
-			var url = this.path + "/" + type + ".json";
-
-			JSONP({
-				url: url,
-				data: params,
-			    success: function(data) {
-					_self.filterList({
-						type: type,
-						data: data
-					});
-			    },
-			    error: this.onErrorHandler
-			});
-		};
-
-		this.filterList = function(obj) {
-
-			var data = obj.data;
-
-	    	for(var i = 0; i < data.results.length; i++) {
-				var result = data.results[i];
-					result.listType = obj.type;
-
-				if(!result.attachment)
-					result.attachment = "No attachment";
-				if(!result.created)
-					result.created = "No created date";
-				if(!result.description)
-					result.description = "No description";
-				if(!result.eventStatus)
-					result.eventStatus = "No event status";
-				if(!result.genre)
-					result.genre = "No genre";
-				if(!result.hasBeginning)
-					result.hasBeginning = "Has no beginning";
-				if(!result.hasEnd)
-					result.hasEnd = "Has no end";
-				if(!result.homepage)
-					result.homepage = "Has no homepage";
-				if(!result.languageNoProblem)
-					result.languageNoProblem = "No language problems";
-				if(!result.modified)
-					result.modified = "Not mofified";
-				if(!result.offers)
-					result.offers = "No offers";
-				if(!result.production)
-					result.production = "No production";
-				if(!result.productionType)
-					result.productionType = "Has no production type";
-				if(!result.sameAs)
-					result.sameAs = "Nothing the same as";
-				if(!result.title)
-					result.title = "Undefined";
-				if(!result.type)
-					result.type = "Has no type";
-				if(!result.uri)
-					result.uri = "Has no uri";
-				if(!result.venue)
-					result.venue = "Has no venue";
-				if(!result.venueType)
-					result.venueType = "Has no venue type";
-	    	}
-
-		    data.metadata.listType = obj.type;
-
-			this.events.emit("loadDataComplete", data);
-		}
-
-		this.onErrorHandler = function(data) {
-			alert("ERROR: " + data);
-		};
-
-		this.init();
-	}
-
-	FedApp.Models.List = List;
-
-})();;(function(){
 	
-	var SingleObject = function(data) {
+	var Detail = function(data) {
 
 		this.path = "http://api.artsholland.com/rest";
 
@@ -394,7 +450,190 @@ var FedApp = FedApp || {};
 		this.init(data);
 	}
 
-	FedApp.Models.SingleObject = SingleObject;
+	FedApp.Models.Detail = Detail;
+
+})();;(function(){
+
+	var List = function() {
+
+		this.path = "http://api.artsholland.com/rest";
+
+		this.events = new Events();
+
+		this.init = function() {
+			console.log("Initialize List model");
+		}
+
+		this.get = function(obj) {
+
+			var _self = this;
+			var type = obj.type;
+			if(!obj.params.locality)
+				obj.params.locality = "amsterdam";
+
+			var params = obj.params;
+			var url = this.path + "/" + type + ".json";
+
+			JSONP({
+				url: url,
+				data: params,
+			    success: function(data) {
+					_self.filterList({
+						type: type,
+						data: data
+					});
+			    },
+			    error: this.onErrorHandler
+			});
+		};
+
+		this.filterList = function(obj) {
+
+			var data = obj.data;
+			var filter = FedApp.Components.Filter;
+
+	    	for(var i = 0; i < data.results.length; i++) {
+				var result = data.results[i];
+					result.listType = obj.type;
+
+				if(!result.attachment)
+					result.attachment = false;
+				if(!result.created){
+					result.created = "No date";
+				}else {
+					var created = filter.trimString(result.created, 10);
+					result.created = created;
+				}
+				if(!result.description)
+					result.description = "No description";
+				if(!result.eventStatus)
+					result.eventStatus = false;
+				if(!result.genre)
+					result.genre = false;
+				if(!result.hasBeginning)
+					result.hasBeginning = false;
+				if(!result.hasEnd)
+					result.hasEnd = false;
+				if(!result.homepage)
+					result.homepage = false;
+				if(!result.languageNoProblem)
+					result.languageNoProblem = false;
+				if(!result.modified)
+					result.modified = false;
+				if(!result.offers)
+					result.offers = false;
+				if(!result.production)
+					result.production = false;
+				if(!result.productionType)
+					result.productionType = false;
+				if(!result.shortDescription){
+					var description = filter.removeHtml(result.description);
+					var shortDescription = filter.trimString(description, 75);
+					result.shortDescription = shortDescription;
+				}else {
+					var description = filter.removeHtml(result.shortDescription);
+					var shortDescription = filter.trimString(description, 75);
+					result.shortDescription = shortDescription;
+				}
+				if(!result.sameAs)
+					result.sameAs = false
+				if(!result.title)
+					result.title = "Untitled";
+				if(!result.type)
+					result.type = false
+				if(!result.uri)
+					result.uri = false;
+				if(!result.venue)
+					result.venue = false
+				if(!result.venueType)
+					result.venueType = false;
+	    	}
+
+		    data.metadata.listType = obj.type;
+
+			this.events.emit("loadDataComplete", data);
+		}
+
+		this.onErrorHandler = function(data) {
+			alert("ERROR: " + data);
+		};
+
+		this.init();
+	}
+
+	FedApp.Models.List = List;
+
+})();;(function(){
+	
+	var VenueDetail = function(data) {
+
+		this.path = "http://api.artsholland.com/rest";
+
+		this.events = new Events();
+
+		this.type = false;
+
+		this.init = function() {
+			console.log("Initialize VenueDetail model");
+		}
+
+		/**
+			Get single object gets a single object from a type and given cidn
+			@type string 'event'
+			@cidn string '2008-A-047-0143827'
+		*/
+		this.get = function(cidn) {
+
+			var _self = this;
+			var cidn = cidn.toLowerCase();
+			var url = this.path + "/venue/" + cidn + ".json";
+
+			JSONP({
+				url: url,
+			    success: function(data) {
+			    	_self.getEvents(data);
+			    },
+			    error: this.onErrorHandler
+			});
+		};
+
+		this.getEvents = function(data) {
+			console.log("getEvents");
+
+			var _self = this;
+			var venueResults = data.results[0];
+			var cidn = venueResults.cidn;
+			var url = this.path + "/venue/" + cidn + "/event.json";
+
+			JSONP({
+				url: url,
+			    success: function(data) {
+			    	_self.filterSingelObj({
+			    		venue: venueResults,
+			    		events: data.results
+			    	});
+			    },
+			    error: this.onErrorHandler
+			});
+		}
+
+		this.filterSingelObj = function(obj) {
+
+			var result = obj;
+
+			console.log(result);
+
+			this.events.emit("loadDataComplete", result);
+		};
+
+		this.onErrorHandler = function(data) {
+			alert("ERROR: " + data);
+		};
+
+		this.init(data);
+	}
+
+	FedApp.Models.VenueDetail = VenueDetail;
 
 })();;(function() {
 
@@ -430,6 +669,8 @@ var FedApp = FedApp || {};
 
 		this.template = "template-detail";
 
+		this.subTemplate = "template-event-detail";
+
 		this.model = false;
 
 		this.events = new Events();
@@ -442,15 +683,18 @@ var FedApp = FedApp || {};
 		this.render = function() {
 
 			var templateId = document.getElementById( this.template );
-
 			var source   = templateId.innerHTML;
 			var template = Handlebars.compile(source);
 
-			return template(this.model)
+			return template();
 		};
 
 		this.afterRender = function() {
-			console.log("afterRender");
+			var templateId = document.getElementById(this.subTemplate);
+			var source   = templateId.innerHTML;
+			var template = Handlebars.compile(source);
+			var subView = document.getElementById("main-content");
+				subView.innerHTML = template(this.model);
 		}
 
 		this.dispose = function() {
@@ -466,7 +710,9 @@ var FedApp = FedApp || {};
 
 	var List = function(data) {
 
-		this.template = "template-list";
+		this.template = "template-main";
+
+		this.subTemplate = "template-list";
 
 		this.model = false;
 
@@ -480,7 +726,6 @@ var FedApp = FedApp || {};
 		this.render = function() {
 
 			var templateId = document.getElementById(this.template);
-
 			var source   = templateId.innerHTML;
 			var template = Handlebars.compile(source);
 
@@ -489,10 +734,14 @@ var FedApp = FedApp || {};
 
 		this.afterRender = function() {
 
-			console.log("List afterRender");
+			var templateId = document.getElementById(this.subTemplate);
+			var source = templateId.innerHTML;
+			var template = Handlebars.compile(source);
+			var subView = document.getElementById("main-content");
+				subView.innerHTML = template(this.model);
 
-			var searchBtn = document.getElementById("form-btn-submit");
-			searchBtn.addEventListener("click", this.onClickHandler);
+			// var searchBtn = document.getElementById("form-btn-submit");
+			// searchBtn.addEventListener("click", this.onClickHandler);
 		};
 
 		this.dispose = function() {
@@ -543,6 +792,8 @@ var FedApp = FedApp || {};
 
 		this.template = "template-main";
 
+		this.subTemplate = "template-home";
+
 		this.model = false;
 
 		this.events = new Events();
@@ -553,13 +804,22 @@ var FedApp = FedApp || {};
 
 		this.render = function() {
 
-			var templateId = document.getElementById( this.template );
-
+			var templateId = document.getElementById(this.template);
 			var source   = templateId.innerHTML;
 			var template = Handlebars.compile(source);
 
 			return template();
-		}
+		};
+
+		this.afterRender = function() {
+			
+			var templateId = document.getElementById(this.subTemplate);
+			var source   = templateId.innerHTML;
+			var template = Handlebars.compile(source);
+			var subView = document.getElementById("main-content");
+				subView.innerHTML = template();
+
+		};
 
 		this.init(obj);
 	}
@@ -592,5 +852,48 @@ var FedApp = FedApp || {};
 	}
 
 	FedApp.Views.Page404 = Page404;
+
+})();;(function(){
+
+	var VenueDetail = function(data) {
+
+		this.template = "template-detail";
+
+		this.subTemplate = "template-venue-detail";
+
+		this.model = false;
+
+		this.events = new Events();
+
+		this.init = function(data) {
+			console.log("Initialize VenueDetail View");
+			this.model = data;
+		};
+
+		this.render = function() {
+
+			var templateId = document.getElementById( this.template );
+			var source   = templateId.innerHTML;
+			var template = Handlebars.compile(source);
+
+			return template();
+		};
+
+		this.afterRender = function() {
+			var templateId = document.getElementById(this.subTemplate);
+			var source   = templateId.innerHTML;
+			var template = Handlebars.compile(source);
+			var subView = document.getElementById("main-content");
+				subView.innerHTML = template(this.model);
+		}
+
+		this.dispose = function() {
+
+		};
+
+		this.init(data);
+	};
+
+	FedApp.Views.VenueDetail = VenueDetail;
 
 })();

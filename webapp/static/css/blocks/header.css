@@ -24,4 +24,19 @@
   padding: 5px 10px;
   text-decoration: none;
   color: #fff;
+  float: left;
+}
+/* line 29, ../../scss/blocks/header.scss */
+.header .global-nav--home .list--home {
+  background-color: #5d5d5d;
+}
+/* line 34, ../../scss/blocks/header.scss */
+.header .global-nav--about .list--about {
+  background-color: #5d5d5d;
+}
+@media (max-width: 960px) {
+  /* line 6, ../../scss/blocks/header.scss */
+  .header .global-nav {
+    margin: 0px 10px;
+  }
 }

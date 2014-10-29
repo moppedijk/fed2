@@ -1,0 +1,44 @@
+.item {
+	&__header {
+		// border-radius: 5px;
+		background-color: #d4d4d4;
+
+		a {
+			overflow: hidden;
+			color: #000;
+			text-decoration: none;
+		}
+
+		h1 {
+			margin:0px;
+			padding: 10px;
+			font-size: 14px;
+		}
+	}
+
+	&__content {
+		border: solid 1px #d4d4d4;
+		// border-radius: 5px;
+		padding: 10px;
+		font-size: 12px;
+		min-height: 65px;
+	}
+
+	&__date {
+		padding-bottom: 5px;
+	}
+
+	&__func {
+		border-bottom: solid 3px #d4d4d4;
+		overflow: hidden;
+
+		&-left {
+			float: left;
+			text-align: left;
+		}
+		&-right {
+			float: right;
+			text-align: right;
+		}
+	}
+}

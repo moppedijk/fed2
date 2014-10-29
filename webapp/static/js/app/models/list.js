@@ -36,49 +36,63 @@
 		this.filterList = function(obj) {
 
 			var data = obj.data;
+			var filter = FedApp.Components.Filter;
 
 	    	for(var i = 0; i < data.results.length; i++) {
 				var result = data.results[i];
 					result.listType = obj.type;
 
 				if(!result.attachment)
-					result.attachment = "No attachment";
-				if(!result.created)
-					result.created = "No created date";
+					result.attachment = false;
+				if(!result.created){
+					result.created = "No date";
+				}else {
+					var created = filter.trimString(result.created, 10);
+					result.created = created;
+				}
 				if(!result.description)
 					result.description = "No description";
 				if(!result.eventStatus)
-					result.eventStatus = "No event status";
+					result.eventStatus = false;
 				if(!result.genre)
-					result.genre = "No genre";
+					result.genre = false;
 				if(!result.hasBeginning)
-					result.hasBeginning = "Has no beginning";
+					result.hasBeginning = false;
 				if(!result.hasEnd)
-					result.hasEnd = "Has no end";
+					result.hasEnd = false;
 				if(!result.homepage)
-					result.homepage = "Has no homepage";
+					result.homepage = false;
 				if(!result.languageNoProblem)
-					result.languageNoProblem = "No language problems";
+					result.languageNoProblem = false;
 				if(!result.modified)
-					result.modified = "Not mofified";
+					result.modified = false;
 				if(!result.offers)
-					result.offers = "No offers";
+					result.offers = false;
 				if(!result.production)
-					result.production = "No production";
+					result.production = false;
 				if(!result.productionType)
-					result.productionType = "Has no production type";
+					result.productionType = false;
+				if(!result.shortDescription){
+					var description = filter.removeHtml(result.description);
+					var shortDescription = filter.trimString(description, 75);
+					result.shortDescription = shortDescription;
+				}else {
+					var description = filter.removeHtml(result.shortDescription);
+					var shortDescription = filter.trimString(description, 75);
+					result.shortDescription = shortDescription;
+				}
 				if(!result.sameAs)
-					result.sameAs = "Nothing the same as";
+					result.sameAs = false
 				if(!result.title)
-					result.title = "Undefined";
+					result.title = "Untitled";
 				if(!result.type)
-					result.type = "Has no type";
+					result.type = false
 				if(!result.uri)
-					result.uri = "Has no uri";
+					result.uri = false;
 				if(!result.venue)
-					result.venue = "Has no venue";
+					result.venue = false
 				if(!result.venueType)
-					result.venueType = "Has no venue type";
+					result.venueType = false;
 	    	}
 
 		    data.metadata.listType = obj.type;

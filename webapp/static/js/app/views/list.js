@@ -2,7 +2,9 @@
 
 	var List = function(data) {
 
-		this.template = "template-list";
+		this.template = "template-main";
+
+		this.subTemplate = "template-list";
 
 		this.model = false;
 
@@ -16,7 +18,6 @@
 		this.render = function() {
 
 			var templateId = document.getElementById(this.template);
-
 			var source   = templateId.innerHTML;
 			var template = Handlebars.compile(source);
 
@@ -25,10 +26,14 @@
 
 		this.afterRender = function() {
 
-			console.log("List afterRender");
+			var templateId = document.getElementById(this.subTemplate);
+			var source = templateId.innerHTML;
+			var template = Handlebars.compile(source);
+			var subView = document.getElementById("main-content");
+				subView.innerHTML = template(this.model);
 
-			var searchBtn = document.getElementById("form-btn-submit");
-			searchBtn.addEventListener("click", this.onClickHandler);
+			// var searchBtn = document.getElementById("form-btn-submit");
+			// searchBtn.addEventListener("click", this.onClickHandler);
 		};
 
 		this.dispose = function() {

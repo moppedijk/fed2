@@ -2,15 +2,50 @@
 	
 	&__label {
 		font-size: 14px;
+		margin-right: 5px;
+		font-style: italic;
+	}
+
+	@media(max-width: 530px) {
+		&__label {
+			display: none;
+		}
 	}
 
 	&__input {
 		font-size: 14px;
-		padding: 0px 5px;
+		padding: 5px 2%;
+		width: 96%;
 
 		&-holder {
 			display: inline-block;
 			border: solid 1px #d4d4d4;
+			margin-right: 5px;
+		}
+
+		@media(max-width: 530px) {
+			&-holder {
+				width: 75%;
+				margin-right: 2%;
+			}
+		}
+	}
+
+	&__submit-btn {
+		text-decoration: none;
+		background-color: #d4d4d4;
+		color: #fff;
+		font-size: 14px;
+		padding: 5px 10px;
+
+		&:hover {
+			background-color: #000;
+		}
+	}
+
+	@media(max-width: 530px) {
+		&__submit-btn {
+			width: 18%;
 		}
 	}
 }
